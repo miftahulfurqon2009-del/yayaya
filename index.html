@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Fira 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,500;1,700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --rose:    #e8637a;
+  --blush:   #f4a0b0;
+  --petal:   #fce8ee;
+  --cream:   #fff8fa;
+  --lavpink: #f9d4df;
+  --gold:    #c9956a;
+  --white:   #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  font-family: 'Nunito', sans-serif;
+}
+
+body {
+  background: linear-gradient(145deg, #fff0f5 0%, #fde8f0 40%, #fce4ef 70%, #fdf0f8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ===== MUSIC HINT ===== */
+#musicHint {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(244,160,176,0.5);
+  color: #c03060;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 30px;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(220,80,110,0.15);
+  animation: hintPulse 1.8s ease-in-out infinite;
+  cursor: pointer;
+  user-select: none;
+}
+@keyframes hintPulse {
+  0%,100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+  50%      { opacity: 1;   transform: translateX(-50%) scale(1.04); }
+}
+#musicHint.hidden { display: none; }
+
+/* ===== ANIMATED SOFT BG BLOBS ===== */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+  animation: blobFloat ease-in-out infinite alternate;
+}
+.blob1 { width:420px; height:420px; background:rgba(248,180,200,0.35); top:-80px; left:-100px; animation-duration:9s; }
+.blob2 { width:350px; height:350px; background:rgba(252,200,220,0.3); bottom:-60px; right:-80px; animation-duration:11s; }
+.blob3 { width:280px; height:280px; background:rgba(255,210,225,0.25); top:40%; left:60%; animation-duration:13s; }
+.blob4 { width:200px; height:200px; background:rgba(244,160,176,0.2); bottom:20%; left:10%; animation-duration:7s; }
+
+@keyframes blobFloat {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(30px,25px) scale(1.08); }
+}
+
+/* ===== FLOATING PETALS ===== */
+.petal {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+  animation: petalDrift linear infinite;
+  opacity: 0;
+  user-select: none;
+}
+@keyframes petalDrift {
+  0%   { transform: translateY(-60px) rotate(0deg) translateX(0px); opacity:0; }
+  8%   { opacity: 0.85; }
+  88%  { opacity: 0.6; }
+  100% { transform: translateY(110vh) rotate(600deg) translateX(60px); opacity:0; }
+}
+
+/* ===== SPARKLES ===== */
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 2;
+  font-size: 14px;
+  animation: sparklePop ease-out forwards;
+  opacity: 0;
+}
+@keyframes sparklePop {
+  0%   { opacity:0; transform: scale(0) rotate(0deg); }
+  40%  { opacity:1; transform: scale(1.4) rotate(20deg); }
+  100% { opacity:0; transform: scale(0.6) rotate(40deg) translateY(-40px); }
+}
+
+/* ===== SCENE ===== */
+.scene {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ===== CARD ===== */
+.card {
+  width: min(490px, 95vw);
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1.5px solid rgba(255,200,218,0.6);
+  border-radius: 36px;
+  padding: 40px 38px 36px;
+  text-align: center;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.9) inset,
+    0 30px 80px rgba(220,100,130,0.18),
+    0 8px 32px rgba(220,100,130,0.1);
+  opacity: 0;
+  transform: translateY(50px) scale(0.94);
+  animation: cardIn 1.5s cubic-bezier(.16,1,.3,1) .2s forwards;
+}
+
+@keyframes cardIn {
+  to { opacity:1; transform:translateY(0) scale(1); }
+}
+
+/* ===== TOP DECO ===== */
+.deco-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.deco-line {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, #f4a0b0, transparent);
+}
+.deco-icon {
+  font-size: 16px;
+  animation: heartbeat 1.8s ease-in-out infinite;
+}
+.deco-icon:nth-child(2) { animation-delay: .3s; }
+.deco-icon:nth-child(3) { animation-delay: .6s; }
+
+@keyframes heartbeat {
+  0%,100%{ transform:scale(1); }
+  14%{ transform:scale(1.3); }
+  28%{ transform:scale(1); }
+  42%{ transform:scale(1.15); }
+}
+
+/* ===== HEADING ===== */
+.eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--blush);
+  margin-bottom: 4px;
+  opacity: 0;
+  animation: fadeSlide .8s ease .9s forwards;
+}
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #c03060;
+  text-shadow: 0 3px 20px rgba(200,60,90,0.2);
+  opacity: 0;
+  animation: fadeSlide .8s ease 1.1s forwards;
+}
+
+@keyframes fadeSlide {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ===== PHOTO ===== */
+.photo-wrap {
+  position: relative;
+  width: 152px;
+  height: 152px;
+  margin: 20px auto 16px;
+  opacity: 0;
+  animation: photoIn 1s cubic-bezier(.34,1.56,.64,1) 1.3s forwards;
+}
+@keyframes photoIn {
+  from { opacity:0; transform:scale(0.6) rotate(-10deg); }
+  to   { opacity:1; transform:scale(1) rotate(0deg); }
+}
+
+.ring-outer {
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  border: 1px dashed rgba(244,160,176,0.5);
+  animation: spin 20s linear infinite;
+}
+.ring-outer::before {
+  content: '✦';
+  position: absolute;
+  top: -7px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: var(--blush);
+}
+
+.ring-gradient {
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, #f7a8b5, #e8637a, #fce8ee, #f7a8b5);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin { to { transform:rotate(360deg); } }
+
+.photo {
+  width: 152px;
+  height: 152px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 10px 40px rgba(200,80,110,0.25), 0 0 0 4px rgba(255,255,255,0.9);
+}
+.photo-placeholder {
+  width: 152px; height: 152px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fce8ee, #f4a0b0);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px;
+  box-shadow: 0 10px 40px rgba(200,80,110,0.2);
+}
+
+/* floating hearts around photo */
+.mini-hearts span {
+  position: absolute;
+  font-size: 13px;
+  animation: miniFloat ease-in-out infinite alternate;
+}
+.mini-hearts span:nth-child(1) { top:-10px; left:10px; animation-duration:2.1s; }
+.mini-hearts span:nth-child(2) { top:10px; right:-8px; animation-duration:2.6s; animation-delay:.4s; }
+.mini-hearts span:nth-child(3) { bottom:-6px; left:20px; animation-duration:2.3s; animation-delay:.8s; }
+.mini-hearts span:nth-child(4) { bottom:10px; right:5px; animation-duration:1.9s; animation-delay:.2s; }
+@keyframes miniFloat {
+  from { transform:translateY(0) rotate(-10deg); }
+  to   { transform:translateY(-8px) rotate(10deg); }
+}
+
+/* ===== TYPING ===== */
+.typing-area {
+  min-height: 50px;
+  margin: 4px 0 8px;
+  opacity: 0;
+  animation: fadeSlide .6s ease 1.6s forwards;
+}
+#typing {
+  font-size: 15px;
+  color: #8a4060;
+  line-height: 1.65;
+  font-weight: 400;
+}
+#cursor {
+  display: inline-block;
+  width: 2px; height: 15px;
+  background: var(--rose);
+  vertical-align: middle;
+  margin-left: 2px;
+  animation: blink .75s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ===== DIVIDER ===== */
+.mid-deco {
+  display: flex; align-items: center; gap: 10px;
+  margin: 10px 0 14px;
+  opacity: 0;
+  animation: fadeSlide .6s ease 2s forwards;
+}
+.mid-deco-line {
+  flex:1; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(244,160,176,0.5), transparent);
+}
+.mid-deco-dots { color: var(--blush); font-size: 11px; letter-spacing: 4px; }
+
+/* ===== QUESTION ===== */
+.question {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-style: italic;
+  color: #c03060;
+  margin-bottom: 22px;
+  line-height: 1.3;
+  opacity: 0;
+  animation: fadeSlide .6s ease 2.1s forwards;
+}
+
+/* ===== BUTTONS ===== */
+.buttons {
+  display: flex; gap: 12px;
+  justify-content: center;
+  margin-bottom: 14px;
+  opacity: 0;
+  animation: fadeSlide .6s ease 2.3s forwards;
+}
+
+.btn {
+  padding: 13px 32px;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
+}
+
+.yes {
+  background: linear-gradient(135deg, #f06080, #d03a60);
+  color: white;
+  box-shadow: 0 8px 28px rgba(220,60,90,0.4), 0 2px 0 rgba(255,255,255,0.2) inset;
+  letter-spacing: 0.3px;
+}
+.yes:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 14px 36px rgba(220,60,90,0.5);
+}
+.yes:active { transform: scale(0.97); }
+.yes::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+@keyframes shimmer { to { left: 160%; } }
+
+.no {
+  background: rgba(255,255,255,0.7);
+  color: #c03060;
+  border: 1.5px solid rgba(240,140,160,0.4);
+  box-shadow: 0 4px 16px rgba(220,100,130,0.1);
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform .1s ease-out, box-shadow .2s;
+}
+
+/* ===== NO TOOLTIP ===== */
+#noTooltip {
+  position: fixed;
+  background: #fff0f4;
+  border: 1px solid rgba(240,140,160,0.4);
+  color: #c03060;
+  font-family: 'Nunito', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity .15s;
+  box-shadow: 0 4px 16px rgba(220,80,110,0.15);
+}
+#noTooltip.show { opacity: 1; }
+
+/* ===== WHY BTN ===== */
+.why-btn {
+  background: none; border: none;
+  color: var(--blush);
+  font-family: 'Nunito', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  display: flex; align-items: center; gap: 6px;
+  margin: 0 auto;
+  transition: color .2s;
+  opacity: 0;
+  animation: fadeSlide .6s ease 2.5s forwards;
+}
+.why-btn:hover { color: var(--rose); }
+.why-arrow {
+  display: inline-block;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.why-btn.open .why-arrow { transform: rotate(180deg); }
+
+/* ===== STORY ===== */
+#story {
+  max-height: 0; overflow: hidden;
+  transition: max-height .8s cubic-bezier(.16,1,.3,1), opacity .5s;
+  opacity: 0;
+}
+#story.show { max-height: 240px; opacity: 1; }
+
+.story-inner {
+  margin-top: 12px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, rgba(255,240,246,0.8), rgba(255,250,252,0.8));
+  border: 1px solid rgba(244,160,176,0.25);
+  border-radius: 18px;
+  text-align: left;
+}
+.story-inner p {
+  font-size: 13.5px;
+  color: #8a4060;
+  line-height: 1.75;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+.story-inner p:last-child { margin-bottom: 0; }
+.story-inner strong { color: var(--rose); font-weight: 700; }
+
+/* ===== RESULT ===== */
+#result {
+  margin-top: 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 23px;
+  color: #d03060;
+  min-height: 30px;
+  text-shadow: 0 2px 20px rgba(220,60,90,0.2);
+  opacity: 0;
+}
+#result.show {
+  animation: resultPop .7s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes resultPop {
+  from { opacity:0; transform:scale(0.6) rotate(-3deg); }
+  to   { opacity:1; transform:scale(1) rotate(0deg); }
+}
+
+/* ===== HEART RAIN ===== */
+.heart-rain {
+  position: fixed;
+  pointer-events: none;
+  z-index: 200;
+  animation: rainFall linear forwards;
+  opacity: 0;
+}
+@keyframes rainFall {
+  0%   { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+  8%   { opacity: 1; }
+  90%  { opacity: 0.8; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity:0; }
+}
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop playsinline preload="auto">
+  <source src="Budi-Doremi-Ada-Untukmu.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Music hint shown until user interacts -->
+<div id="musicHint" onclick="startMusic(true)">🎵 Tap untuk mulai musik</div>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+<div class="blob blob4"></div>
+
+<div id="noTooltip"></div>
+
+<div class="scene">
+  <div class="card">
+
+    <div class="deco-top">
+      <div class="deco-line"></div>
+      <div class="deco-icon">🌸</div>
+      <div class="deco-icon">💕</div>
+      <div class="deco-icon">🌸</div>
+      <div class="deco-line"></div>
+    </div>
+
+    <div class="eyebrow">Sebuah kejutan kecil untukmu</div>
+    <h1>Untuk Fira</h1>
+
+    <div class="photo-wrap">
+      <div class="ring-outer"></div>
+      <div class="ring-gradient"></div>
+      <img class="photo" src="fira.jpeg" alt="Fira"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="photo-placeholder" style="display:none;">🌸</div>
+      <div class="mini-hearts">
+        <span>💗</span><span>✨</span><span>🌸</span><span>💖</span>
+      </div>
+    </div>
+
+    <div class="typing-area">
+      <span id="typing"></span><span id="cursor"></span>
+    </div>
+
+    <div class="mid-deco">
+      <div class="mid-deco-line"></div>
+      <div class="mid-deco-dots">✦ ✦ ✦</div>
+      <div class="mid-deco-line"></div>
+    </div>
+
+    <div class="question">Fira, mau nggak jadi pacarku? </div>
+
+    <div class="buttons">
+      <button class="btn yes" onclick="acceptLove()">Mau</button>
+      <button class="btn no" id="noBtn">Tidak</button>
+    </div>
+
+    <button class="why-btn" onclick="toggleStory(this)">
+      Kenapa aku suka kamu
+      <span class="why-arrow">↓</span>
+    </button>
+
+    <div id="story">
+      <div class="story-inner">
+        <p>Dari pertama kali aku kenal kamu, ada sesuatu yang bikin aku selalu inget kamu.</p>
+        <p>Cara kamu ngetreat, cara kamu tengil yang tak bisa aku lupa, dan cara kamu jadi diri kamu sendiri.</p>
+        <p>Mungkin ini cuma website kecil, tapi aku bikin ini khusus cuma buat kamu.</p>
+        <p><strong>Aku harap kamu mau jadi bagian dari hidupku ❤️</strong></p>
+      </div>
+    </div>
+
+    <div id="result"></div>
+
+  </div>
+</div>
+
+<script>
+/* ===== MUSIC ===== */
+const music = document.getElementById('bgMusic');
+const hint  = document.getElementById('musicHint');
+let musicStarted = false;
+
+function startMusic(fromHint = false) {
+  if (musicStarted) return;
+  music.volume = 0.9;
+  music.play().then(() => {
+    musicStarted = true;
+    hint.classList.add('hidden');
+  }).catch(() => {
+    // still blocked — keep hint visible
+  });
+}
+
+// Try on page load (works on some browsers/desktop)
+window.addEventListener('load', () => startMusic());
+
+// Start on ANY first interaction anywhere on the page
+['click','touchstart','keydown','scroll','mousemove'].forEach(evt => {
+  document.addEventListener(evt, function handler() {
+    startMusic();
+    document.removeEventListener(evt, handler);
+  }, { once: true });
+});
+
+/* ===== PETALS ===== */
+const petalList = ['🌸','🌺','🌷','✿','🏵️'];
+for (let i = 0; i < 22; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.textContent = petalList[Math.floor(Math.random() * petalList.length)];
+  p.style.cssText = `
+    left:${Math.random()*100}vw;
+    font-size:${Math.random()*16+9}px;
+    animation-duration:${Math.random()*14+10}s;
+    animation-delay:${Math.random()*10}s;
+  `;
+  document.body.appendChild(p);
+}
+
+/* ===== RANDOM SPARKLES ===== */
+function spawnSparkle() {
+  const s = document.createElement('div');
+  s.className = 'sparkle';
+  s.textContent = ['✨','⭐','💫','✦'][Math.floor(Math.random()*4)];
+  s.style.cssText = `
+    left:${Math.random()*90+5}vw;
+    top:${Math.random()*80+5}vh;
+    animation-duration:${Math.random()*1.5+1}s;
+    font-size:${Math.random()*10+10}px;
+  `;
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 2500);
+}
+setInterval(spawnSparkle, 900);
+
+/* ===== TYPING ===== */
+const text = "Sejak kenal kamu, hari aku selalu terasa lebih berwarna dan menyenangkan 🌸";
+let idx = 0;
+function typeChar() {
+  if (idx < text.length) {
+    document.getElementById('typing').textContent += text[idx++];
+    setTimeout(typeChar, 40);
+  } else {
+    setTimeout(() => document.getElementById('cursor').style.opacity = '0', 2500);
+  }
+}
+setTimeout(typeChar, 1800);
+
+/* ===== NO BUTTON ESCAPE WITH FUNNY TOOLTIPS ===== */
+const noBtn = document.getElementById('noBtn');
+const tooltip = document.getElementById('noTooltip');
+const funnyMessages = [
+  "Eh kabur dulu 🏃‍♀️💨",
+  "Nggak ada pilihan lain! 😤",
+  "Tombol ini pemalu 🙈",
+  "Udah deh, klik Mau aja 🥺",
+  "dipencet mulu? 👀",
+  "Yakin banget nggak mau? 🤔",
+  "Kok lari terus sih 😭",
+  "Tombol ini hidup sendiri 😅",
+  "Aku bisa gini terus loh! 😈",
+  "Mending nyerah deh... 😂",
+  "Hati kamu bilang Mau kan? 💗",
+  "Tombolnya udah capek lari 😮‍💨",
+];
+let noCount = 0;
+
+noBtn.addEventListener('mousemove', (e) => {
+  const maxR = Math.min(100 + noCount * 18, 290);
+  const angle = Math.random() * Math.PI * 2;
+  const dist  = maxR * (0.75 + Math.random() * 0.25);
+  const nx = Math.cos(angle) * dist;
+  const ny = Math.sin(angle) * dist;
+
+  noBtn.style.transition = 'transform .1s cubic-bezier(.34,1.56,.64,1)';
+  noBtn.style.transform  = `translate(${nx}px, ${ny}px)`;
+
+  tooltip.textContent = funnyMessages[noCount % funnyMessages.length];
+  tooltip.style.left = (e.clientX + 16) + 'px';
+  tooltip.style.top  = (e.clientY - 34) + 'px';
+  tooltip.classList.add('show');
+  clearTimeout(tooltip._t);
+  tooltip._t = setTimeout(() => tooltip.classList.remove('show'), 1300);
+
+  noCount++;
+});
+
+/* ===== STORY TOGGLE ===== */
+function toggleStory(btn) {
+  document.getElementById('story').classList.toggle('show');
+  btn.classList.toggle('open');
+}
+
+/* ===== ACCEPT LOVE ===== */
+function acceptLove() {
+  const result = document.getElementById('result');
+  result.textContent = '🎉 Yeay! Sekarang Fira pacarnya aku! ❤️';
+  result.classList.add('show');
+
+  const items = ['❤️','🌸','💕','🌺','💖','✨','🌷','💗','🎀','💝','🌟'];
+  for (let j = 0; j < 100; j++) {
+    setTimeout(() => {
+      const h = document.createElement('div');
+      h.className = 'heart-rain';
+      h.textContent = items[Math.floor(Math.random() * items.length)];
+      const drift = (Math.random() - 0.5) * 100;
+      h.style.cssText = `
+        left:${Math.random()*100}vw;
+        top:-40px;
+        font-size:${Math.random()*20+12}px;
+        animation-duration:${Math.random()*4+3}s;
+        margin-left:${drift}px;
+      `;
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 8000);
+    }, j * 55);
+  }
+}
+</script>
+</body>
+</html>
